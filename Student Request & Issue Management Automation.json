@@ -1,0 +1,900 @@
+{
+  "name": "Student Request & Issue Management Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "60869d0c-75cb-4664-a6e2-9f065940fb91",
+                    "leftValue": "={{ $json.request_type }}",
+                    "rightValue": "Complaint",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Complaint"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.request_type }}",
+                    "rightValue": "Leave Request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "c6a3ca81-4ea9-4b2d-9a1b-fca37b1c43ce"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Leave"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "262c79d2-7e63-4776-9d1c-88f71d89d3fa",
+                    "leftValue": "={{ $json.request_type }}",
+                    "rightValue": "Academic Query ",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Academic Query"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e1b35543-dfee-4e48-aa32-b409c290d3b4",
+                    "leftValue": "={{ $json.request_type }}",
+                    "rightValue": "Document Request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Document Request"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a9345287-c830-4263-b6d0-6825a059f488",
+                    "leftValue": "={{ $json.request_type }}",
+                    "rightValue": "Infrastructure Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Infrastructure Issue"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -464,
+        896
+      ],
+      "id": "28018447-e8d2-4eb4-8529-c2fc247495d2",
+      "name": "request_type"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e394bb22-e411-489e-b3e6-714386c78ee4",
+              "name": "student_name",
+              "value": "={{ $json['Student Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e7a2d8b9-1acf-4bc3-9f58-a9f641150bbf",
+              "name": "roll_number",
+              "value": "={{ $json['Roll Number / Enrollment ID'] }}",
+              "type": "string"
+            },
+            {
+              "id": "d71b4a30-e5dc-494c-81ca-d1ac880acfda",
+              "name": "student_email",
+              "value": "={{ $json['Email ID'] }}",
+              "type": "string"
+            },
+            {
+              "id": "9be5ddc4-39c2-48e0-bdd4-39dcbeaa8dd9",
+              "name": "department",
+              "value": "={{ $json.Department }}",
+              "type": "string"
+            },
+            {
+              "id": "adbc4664-3758-4364-a21a-88ee2990f15b",
+              "name": "course",
+              "value": "={{ $json.Course }}",
+              "type": "string"
+            },
+            {
+              "id": "a2c56168-46c6-48ad-ab9b-0ef0a59f8246",
+              "name": "semester",
+              "value": "={{ $json.Semester }}",
+              "type": "number"
+            },
+            {
+              "id": "34bcea8f-428b-4ac3-bcc8-a43e7174eb71",
+              "name": "request_type",
+              "value": "={{ $json['Type of Request'] }}",
+              "type": "string"
+            },
+            {
+              "id": "217b2079-2846-4225-9f16-e2e9aa67866a",
+              "name": "priority",
+              "value": "={{ $json['Priority Level'] }}",
+              "type": "string"
+            },
+            {
+              "id": "4d93fc6c-15e8-4049-bb69-02788ad5e7e3",
+              "name": "description",
+              "value": "={{ $json.Message }}",
+              "type": "string"
+            },
+            {
+              "id": "13a2d826-e6c2-4d71-a49c-a9dd45e5e27a",
+              "name": "submitted_at",
+              "value": "={{ $json.submittedAt }}",
+              "type": "string"
+            },
+            {
+              "id": "eb4c6034-ecf9-4526-818f-5fb61c46e2b9",
+              "name": "time",
+              "value": "={{ new Date($json.submittedAt).toLocaleDateString('en-GB') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -688,
+        944
+      ],
+      "id": "c9703f1e-e466-4854-8185-9cf058d7c73b",
+      "name": "clean_fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "FITE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ee145f8c-5012-4917-9a52-cb3a4a1a98a1"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "IT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "6b43851a-1e9b-4a2c-befb-dffe9e9467f4",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "NMCH",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Medical"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "847de67a-3b14-4cf4-9136-3b2824b419c4",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "NIAHS",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Agriculture"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "81209571-e973-4d13-a2e5-aa82e3146b7d",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "Law",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Law"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "57ccbccf-8891-41ce-ba35-39310d943c99",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "FMS",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Commerce"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -240,
+        896
+      ],
+      "id": "4b728aec-2ba6-42d1-b443-d28fed42a249",
+      "name": "department"
+    },
+    {
+      "parameters": {
+        "formTitle": "XYZ University – Student Request & Support Form",
+        "formDescription": "This form is for students of XYZ University to submit official requests such as complaints, leave applications, academic queries, document requests, or infrastructure issues.\nAll submissions are reviewed by the concerned department.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Student Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Roll Number / Enrollment ID",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email ID",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Department",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "NMCH"
+                  },
+                  {
+                    "option": "NIAHS"
+                  },
+                  {
+                    "option": "FITE"
+                  },
+                  {
+                    "option": "FMS"
+                  },
+                  {
+                    "option": "Law"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Course",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Semester",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Type of Request",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Complaint"
+                  },
+                  {
+                    "option": "Leave Request"
+                  },
+                  {
+                    "option": "Academic Query"
+                  },
+                  {
+                    "option": "Document Request"
+                  },
+                  {
+                    "option": "Infrastructure Issue"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Priority Level",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Normal"
+                  },
+                  {
+                    "option": "Urgent"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Message",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Confirmation",
+              "fieldType": "checkbox",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "I confirm that the information provided is accurate. I have selected the priority level after careful consideration and understand that misuse or incorrect selection of priority may affect the processing of my request and may lead to appropriate disciplinary action as per university rules."
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "After submission, your request will be recorded and forwarded to the concerned department. Please allow reasonable time for review and response."
+            }
+          },
+          "useWorkflowTimezone": true
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -912,
+        928
+      ],
+      "id": "4361732a-2240-4785-a601-5ddfb3da2570",
+      "name": "Form",
+      "webhookId": "4de656ae-0f29-4dc2-b3a2-29d9390afce9"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('clean_fields').item.json.priority }}",
+                    "rightValue": "Normal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "df2c87d8-58b9-410b-b40b-924c308046b7"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Normal "
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "5a456ce1-54eb-4c1e-b2d2-e111d7516429",
+                    "leftValue": "={{ $('clean_fields').item.json.priority }}",
+                    "rightValue": "Urgent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Urgent"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        944
+      ],
+      "id": "5187f2f5-e5a9-4e31-9ab6-b12e69abebf4",
+      "name": "priority"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1jptMnLjqDiz12fLk6tcz9kHcdE9cMZ35vM6CuSlYNtg/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json.department }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Roll No.": "={{ $json.roll_number }}",
+            "Time of Submission": "={{ new Date($json.submitted_at).toLocaleDateString('en-GB') }}",
+            "Student Name": "={{ $json.student_name }}",
+            "Email ID": "={{ $json.student_email }}",
+            "Semester": "={{ $json.semester }}",
+            "Type of Request": "={{ $json.request_type }}",
+            "Priority": "={{ $json.priority }}",
+            "Message": "={{ $json.description }}",
+            "Status": "Pending",
+            "Course": "={{ $json.course }}"
+          },
+          "matchingColumns": [
+            "Roll No."
+          ],
+          "schema": [
+            {
+              "id": "Time of Submission",
+              "displayName": "Time of Submission",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Roll No.",
+              "displayName": "Roll No.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Student Name",
+              "displayName": "Student Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email ID",
+              "displayName": "Email ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Course",
+              "displayName": "Course",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Semester",
+              "displayName": "Semester",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Type of Request",
+              "displayName": "Type of Request",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        848
+      ],
+      "id": "6fec15c5-c437-4120-9bb2-fc34f95c85aa",
+      "name": "Logs",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "d555l29rYo1Wc8wA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('clean_fields').item.json.student_email }}",
+        "subject": "Request Received – XYZ University",
+        "emailType": "text",
+        "message": "=Dear Student,\n\nThis is to confirm that your request has been successfully received by XYZ University.\n\nRequest Details\nStudent Name: {{ $('clean_fields').item.json.student_name }}\nRoll Number: {{ $('clean_fields').item.json.roll_number }}\nCourse: {{ $('clean_fields').item.json.course }}\nDepartment: {{ $('clean_fields').item.json.department }}\nType of Request: {{ $('clean_fields').item.json.request_type }}\nPriority: {{ $('clean_fields').item.json.priority }}\nDate of Submission: {{ $json['Time of Submission'] }}\n\nYour request has been forwarded to the concerned department and is currently under review. You will be notified once further action is taken.\n\nRegards,\nXYZ University Administration\n\nThis is an automated message. Please do not reply.\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        848
+      ],
+      "id": "a18a14d0-4cbf-435b-8f2f-68da2a7ce450",
+      "name": "student_response_copy",
+      "webhookId": "eff8576d-37d5-4199-ba8e-f9fb495e0a63",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "asBXQlQweevDnSna",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "apurvraj000@gmail.com",
+        "subject": "URGENT: Student Request Received – XYZ University",
+        "emailType": "text",
+        "message": "=An urgent student request has been received and requires immediate attention.\n\nStudent: {{ $json.student_name }}\nRoll No: {{ $json.roll_number }}\nCourse: {{ $json.course }}\nDepartment: {{ $json.department }}\nRequest Type: {{ $json.request_type }}\nSubmitted On: {{ $json.time }}\n\nPlease review the request at the earliest as per university protocol.\n\nXYZ University Automation System",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        1040
+      ],
+      "id": "fa621eb9-5e3c-4b11-9422-14296cc74271",
+      "name": "email_to_office",
+      "webhookId": "4eb0daf2-77d0-4617-9f38-c7aa7093c5c5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "asBXQlQweevDnSna",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "request_type": {
+      "main": [
+        [
+          {
+            "node": "department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "department",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "department",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_fields": {
+      "main": [
+        [
+          {
+            "node": "request_type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "department": {
+      "main": [
+        [
+          {
+            "node": "priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "priority",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        [
+          {
+            "node": "clean_fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "priority": {
+      "main": [
+        [
+          {
+            "node": "Logs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Logs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "email_to_office",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Logs": {
+      "main": [
+        [
+          {
+            "node": "student_response_copy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "4c1dee5e-3103-4103-a696-3f74c770d585",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6fd5feb91d3c71ea39bc6d8af635b6d3011abdae493a31eaaec4e6a5a5858dda"
+  },
+  "id": "05BtKQaNkLSW5ADWOSnmX",
+  "tags": []
+}
